@@ -10,49 +10,66 @@
 /* First we'll use jQuery to create some DOM elements that make a nice form */
 
 //Use the jQuery selector function $() to select the '#poll-options' element
+var pollElement = $('#poll-options');
 
 
 //Use console.log to log out that variable (to show that everything works)
 
+console.log(pollElement);
 
 //Use the jQuery selector function $() to create a new <input> element
 //Remember to include the < > when specifying the new element to make!
-
+var newInput = $('<input>');
 
 //Use .append() to append your input element to the pollOptions element
 
+$(pollElement).append(newInput);
 
 //Use .addClass() to add the 'form-control' class to your input
 
+$(newInput).addClass('form-control');
 
 //Use .attr() to set the following attributes of the input:
 //  'type' :        'text'
 //  'placeholder' : 'Your option here' 
 //Try to do this with only a single function call!
 
+$(newInput).attr( {'type':'text', 'placeholder':'Your option here'} );
 
 //Create a new <label> element with the HTML:
 //  '<label class="input-group-addon"></label>'
 //You can just use the $() function to specify the entire html String
 
+var newLabel = $('<label class="input-group-addon"></label>');
 
 //Use .text() to specify the text of the label: "1."
 
+$(newLabel).text("1.");
 
 //Attach the label BEFORE the input
 //Hint: see http://api.jquery.com/category/manipulation/dom-insertion-outside/
 
+$(newLabel).insertBefore(newInput);
 
 //Surround ("wrap") both the <input> and the <label> with the element
 //  '<div class="input-group">'
 //Use the group selector (the comma ,) to select both elements with jQuery
 //Hint: http://api.jquery.com/category/manipulation/dom-insertion-around/
 
+var inputGroup = $('<div class="input-group">');
 
+$('input, label').wrapAll(inputGroup);
 
 /* Now we'll make it so you can add new inputs! */
 
 //Select the '#addButton' and register an event listener that responds to clicks
+var addButt = $('#addButton');
+
+$(addButt).click(function(event) {
+  console.log("clicky click");
+
+  inputGroup.clone().appendTo(pollElement);
+});
 
 
   //The following steps should occur when the button is clicked:
@@ -72,16 +89,23 @@
   //Select all the 'input' elements on the screen, and get the .length
   //of the array. Log out that number, which is the number of options
 
+  var allInput = $('input');
+  console.log(allInput.length);
 
   //Select the 'label' element in the duplicate. Hint: use .children()
+
+  var labelDup = $('input-group').children('label');
 
 
   //Set the text of this new label to be the number of options
 
+  labelDup.text('1');
 
   //Any values the user has typed in will be copied along with the 'input-group'
   //Select the duplicate's 'input' element and set it's value to be empty ''
   //Hint: use .val()
+
+  
 
 
   //Extra: update `for` and `id` attributes
